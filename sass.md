@@ -271,10 +271,15 @@ $width-small:  0 400px;
 $width-medium: 401px 800px;
 $width-large:  801px;
 @mixin responsive($minWid,$maxWid:0) {
-    @if $maxWid>0 {
+    @if $maxWid>0 and $minWid>0 {
       @media only screen and (min-width: $minWid) and (max-width: $maxWid) {
         @content;
       }
+    }
+    @else if $maxWid>0{
+         @media only screen and (max-width: $maxWid){
+            @content;
+          }
     }
     @else{
       @media only screen and (min-width: $minWid){
@@ -299,7 +304,7 @@ $width-large:  801px;
 
 ######@mixin和@extend的区别
 * @extend 
-   * 基于某个选择器，将其他类似需求的选择器挂靠上，以提高复用程度
+   * 基于某个选择器，将其他类似需求的选择器挂靠上以提高复用程度
    * 编译后可生成DRY CSS风格的代码
       如：
        ```scss
@@ -371,7 +376,7 @@ $group:(puma, black, default),(sea-slug, blue, pointer),(egret, white, move);
     }
 }
 ```
-######@wihile
+######@while
 ```scss
 $i: 6;
 @while $i > 0 {
@@ -390,6 +395,19 @@ $b: 10px;
 }
 #sidebar {
   width: grid-width(5);
+}
+
+客管的又要兼容小程序的rpx,要兼容h5的rem，那宽度这些就需要写个通用的
+
+@function len($n){
+    return $n+'rem'
+}
+@function len($n){
+    return $n+'rpx'
+}
+
+.block{
+    width:len(18)
 }
 ```
 #####注释
