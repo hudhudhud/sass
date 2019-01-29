@@ -13,7 +13,7 @@
  }
 ```
 #####多值变量，分为list类型和map类型
-######list类型，list数据可通过空格，逗号或小括号分隔多个值，可用nth($var,$index)取值
+######list类型，list数据可通过空格，逗号或小括号分隔多个值，可用```nth($var,$index)```取值
 ```scss
 //一维数据
 $HSize:12px 14px 16px;
@@ -31,7 +31,7 @@ $px2: (5px 10px) (0 auto);
 }
 ```
 ######map数据以key和value成对出现，其中value又可以是list。
-######格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值,map-has-key($map,$key)判断有无key
+######格式为：```$map: (key1: value1, key2: value2, key3: value3);```。可通过```map-get($map,$key)```取值,```map-has-key($map,$key)```判断有无key
 ```scss
 $map:(dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twitter: #55acee);
 .twitter {
@@ -50,18 +50,6 @@ $map:(dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twi
 }
 ```
 
-```scss
-@mixin res($key, $map: $--breakpoints) {
-  // 循环断点Map，如果存在则返回
-  @if map-has-key($map, $key) {
-    @media only screen and #{inspect(map-get($map, $key))} {
-      @content;
-    }
-  } @else {
-    @warn "Undefeined points: `#{$map}`";
-  }
-}
-```
 ##### ${}插值,插值语句可以在选择器或属性名中使用变量
 ```scss
 $name: foo;
@@ -184,7 +172,7 @@ p {
 .main-col{ 
   color: #106021 + #023212; 
 }
-编译为
+//编译为
 .main-col{
   color : #129233
 };
@@ -217,7 +205,6 @@ a {
 }
 ```
 ######% ,带有 % 符号的选择器不会被编译输出，但是可以被 @extend 到
-#####避免了以前在一些基础的文件中预定义了很多基础的样式，然后实际应用中不管是否使用了@extend去继承相应的样式，都会解析出来所有的样式
 ```scss
 %extreme {
     color: blue;
@@ -460,7 +447,7 @@ $width-large:  801px;
     }
 ```
 ######三目判断
-* if($condition, $if_true, $if_false)
+* ```if($condition, $if_true, $if_false)```
 ```scss
 $n:1;
 h1{
@@ -478,7 +465,7 @@ h1{
     }
 }
 ```
-######@each, @each $var in <list or map>
+######@each, ```@each $var in <list or map>```
 ```scss
 //一些按钮图标
 $icon-data:puma, sea-slug, egret, salamander !default;
@@ -543,7 +530,7 @@ $i: 6;
 }
 ```
 #####函数
-######颜色函数 rgb($red,$green,$blue)，rgba($color,$alpha)，lighten($color,$amount)，darken($color,$amount)
+######颜色函数``` rgb($red,$green,$blue)```，```rgba($color,$alpha)```，```lighten($color,$amount)```，```darken($color,$amount)```
 ```scss
 a {
   color: rgb(256, 256, 256);
@@ -594,3 +581,5 @@ $b: 10px;
 * 单行注释 //comment,只保留在sass源文件中，编译后被省略。
 
 * 重要注释 /*!comment*/,即使压缩模式编译，也会保留这行注释，通常可以用于声明版权信息。
+
+```
