@@ -69,7 +69,7 @@
     //变量是数组，用nth($HSize,index)
     .block {
         $height: 200px !global;//局部变量转全局变量，否则报错
-        height: $height ;
+        height: $height*2 ;
         width: 800px;
         //line-height: $height;
         background-color: rgba(0, 0, 0, 0.3);
@@ -90,13 +90,24 @@
         font-size:nth($HSize,3)
     }
 
+    $map:(dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twitter: #55acee);
+    .twitter {
+        background-color: map-get($map, twitter);
+    }
+    .facebook {
+        background-color: map-get($map, facebook);
+    }
+
+
     //如果变量需要镶嵌在字符串之中，就必须写在#{}之中。
     $side : left;
     .rounded{
         border-#{$side}-radius : 5px;
     }
-
+    $font-size:20px   ;
+    $font-size:100px ;
     .code{
+        font-size:$font-size;
         $attr:border;
         $mainColor:red;
         #{$attr}-color: #{$mainColor};//属性值也可以用插值，跟使用变量一样

@@ -1,8 +1,8 @@
 
 ##### 变量
 ```scss
- $contentWidth:1400px;
- $contentWidth:1400px !default ;
+ $contentWidth:1200px;
+ $contentWidth:1400px !default ;//默认值，加上!default标识的语句会被优先编译和赋值.默认变量的价值在进行组件化开发的时候会非常有用。
  .block{
         $height: 200px !global; //局部变量转全局变量
         height: $height;
@@ -12,10 +12,14 @@
    height:$height;
  }
 ```
-######一个变量含有多个值，如$i : 12px 15px 16px 14px
-######取第index个值时**nth($i,index)**
+#####多值变量，分为list类型和map类型
+######list类型，list数据可通过空格，逗号或小括号分隔多个值，可用nth($var,$index)取值
 ```scss
+//一维数据
 $HSize:12px 14px 16px;
+//二维数据
+$px1: 5px 10px, 0 auto;
+$px2: (5px 10px) (0 auto);
 .f1{
    font-size:nth($HSize,1)
 }
@@ -24,6 +28,38 @@ $HSize:12px 14px 16px;
 }
 .f3{
   font-size:nth($HSize,3)
+}
+```
+######map数据以key和value成对出现，其中value又可以是list。
+######格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值,map-has-key($map,$key)判断有无key
+```scss
+$map:(dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twitter: #55acee);
+.twitter {
+    background-color: map-get($map, twitter);
+}
+.facebook {
+    background-color: map-get($map, facebook);
+}
+ 
+//css style
+.twitter {
+  background-color: #55acee;
+}
+.facebook {
+  background-color: #3b5998;
+}
+```
+
+```scss
+@mixin res($key, $map: $--breakpoints) {
+  // 循环断点Map，如果存在则返回
+  @if map-has-key($map, $key) {
+    @media only screen and #{inspect(map-get($map, $key))} {
+      @content;
+    }
+  } @else {
+    @warn "Undefeined points: `#{$map}`";
+  }
 }
 ```
 ##### ${}插值,插值语句可以在选择器或属性名中使用变量
@@ -61,6 +97,56 @@ p.#{$name} {
   font-family: fantasy;
   font-size: 30em;
   font-weight: bold;
+}
+```
+
+######@at-root
+```scss
+.block {}
+.block__element{}
+.block__modifier{}
+
+.block {
+    color: red;
+    #{&}__element {  //#{&}引用父类选择器
+        color:blue;
+    }
+    #{&}__modifier {
+        color: orange;
+    }
+}
+
+//编译结果
+.block {
+  color: red; 
+}
+.block .block__element {
+  color: blue; 
+}
+.block .block__modifier {
+  color: orange; 
+}
+
+
+//用at-root 跳出嵌套，编译出来的CSS无任何嵌套，不管多少层
+.block {
+    color: red;
+    @at-root #{&}__element {
+        color: blue;
+    }
+    @at-root #{&}__modifier {
+        color:orange;
+    }
+}
+//编译结果
+.block {
+  color: red; 
+}
+.block__element {
+  color: blue; 
+}
+.block__modifier {
+  color: orange; 
 }
 ```
 ##### 计算
@@ -131,6 +217,7 @@ a {
 }
 ```
 ######% ,带有 % 符号的选择器不会被编译输出，但是可以被 @extend 到
+#####避免了以前在一些基础的文件中预定义了很多基础的样式，然后实际应用中不管是否使用了@extend去继承相应的样式，都会解析出来所有的样式
 ```scss
 %extreme {
     color: blue;
@@ -145,7 +232,8 @@ a {
     @extend .notice
 }
 ```
-#####@Mixin 用于定义可重复使用的样式(@include)
+#####混合器(mixin) 用于定义可重复使用的样式,通过@include来调用
+#####可以传递参数，参数名以$符号开始，多个参数以逗号分开，也可以给参数设置默认值
 ```html
 <div class="in">
     <p class="fl">left</p>
@@ -201,7 +289,7 @@ p.c{
     @include sexy-border($width: 2px, $color: red);
 }
 ```
-######...未知参数个数,传递多值参数,不确定用多少个参数，则参数后加...，会当成数值列表处理
+######传递多值参数,如果一个参数可以有多组值，则参数后加...，会当成数值列表处理
 ```scss
 @mixin box-shadow($shadows...) {
     -moz-box-shadow: $shadows;
@@ -231,7 +319,7 @@ $value-map: (text: #00ff00, background: #0000ff, border: #ff0000);
     @include colors($value-map...);
 }
 ```
-######@content 传入代码片段
+######@content 传入代码片段,它可以使@mixin接受一整块样式
 ```scss
 @mixin colors($color: red) {
     background-color: $color;
@@ -271,15 +359,10 @@ $width-small:  0 400px;
 $width-medium: 401px 800px;
 $width-large:  801px;
 @mixin responsive($minWid,$maxWid:0) {
-    @if $maxWid>0 and $minWid>0 {
+    @if $maxWid>0 {
       @media only screen and (min-width: $minWid) and (max-width: $maxWid) {
         @content;
       }
-    }
-    @else if $maxWid>0{
-         @media only screen and (max-width: $maxWid){
-            @content;
-          }
     }
     @else{
       @media only screen and (min-width: $minWid){
@@ -302,10 +385,46 @@ $width-large:  801px;
 }
 ```
 
+```scss
+  $breakpoints: (
+      'small'  : ( max-width:400px ),
+      'medium' : "( min-width: 401px ) and (max-width:800px)",
+      'large'  : ( min-width: 801px )
+  );
+
+  @mixin respond-to($name) {
+    @if map-has-key($breakpoints, $name) {
+      @media #{map-get($breakpoints, $name)} {
+        @content;
+      }
+    }
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$name}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+    }
+  }
+  .container{
+     @include  respond-to(large){
+      background-color:green;
+     }
+     @include  respond-to(medium){
+       font-size: 14px;
+       background-color:pink;
+     }
+     @include  respond-to(small){
+        font-size: 12px;
+        background-color:red;
+     }
+     @include  respond-to(b){//编译时就会出现@warn的错误
+      color:pink ;
+     }
+  }
+```
+
 ######@mixin和@extend的区别
 * @extend 
    * 基于某个选择器，将其他类似需求的选择器挂靠上以提高复用程度
-   * 编译后可生成DRY CSS风格的代码
+   * 编译后相同项会合并
       如：
        ```scss
            .button { background: green; }
@@ -318,10 +437,11 @@ $width-large:  801px;
        ```
         但是 @mixin 就不能产生 DRY 式的代码。
 * @mixin
-   * @mixin 定义的是一个片段，这个片段可以是类似变量的一段文字一条属性，也可以是一整个选择器和内容，也可以是一个选择器的一部分 CSS 代码。
+   * @mixin 定义的是一个片段。
    * 可以传递参数，通过参数生成不同代码。
    * 它需要配合 @inclde 命令来引用这段代码，类似复制的效果。
    * @mixin 定义的内容，不会编译输出。
+   * 不合并
 
 #####流程控制语句（@if、@for、@each、@while）
 ######@if
@@ -339,7 +459,15 @@ $width-large:  801px;
         }
     }
 ```
-#######@for
+######三目判断
+* if($condition, $if_true, $if_false)
+```scss
+$n:1;
+h1{
+   font-size:if($n==1,8px,20px);
+}
+```
+######@for
 ```scss
 //@for $var from <start> through <end> 包括end
 //@for $var from <start> to <end> 不包括end
@@ -350,10 +478,10 @@ $width-large:  801px;
     }
 }
 ```
-######@each
+######@each, @each $var in <list or map>
 ```scss
 //一些按钮图标
-$icon-data:a b c d !default;
+$icon-data:puma, sea-slug, egret, salamander !default;
 %bgi{
     background-repeat: no-repeat;
     -webkit-background-size: cover;
@@ -367,6 +495,7 @@ $icon-data:a b c d !default;
 }
 ```
 ```scss
+//多个字段list数据循环
 $group:(puma, black, default),(sea-slug, blue, pointer),(egret, white, move);
 @each $img, $color, $cursor in $group {
     .#{$img}-icon {
@@ -374,6 +503,33 @@ $group:(puma, black, default),(sea-slug, blue, pointer),(egret, white, move);
         border: 2px solid $color;
         cursor: $cursor;
     }
+}
+@each $th in $group {
+  .#{nth($th, 1)}-icon {
+        background-image: url('/images/#{nth($th, 1)}.png');
+        border: 2px solid nth($th, 2);
+        cursor: nth($th, 3);
+    }
+}
+
+```
+```scss
+//多个字段map数据循环
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+@each $header, $size in $headings {
+  #{$header} {
+    font-size: $size;
+  }
+}
+//css style
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.2em;
 }
 ```
 ######@while
@@ -386,7 +542,28 @@ $i: 6;
     $i: $i - 2;
 }
 ```
-#####自定义函数 @function
+#####函数
+######颜色函数 rgb($red,$green,$blue)，rgba($color,$alpha)，lighten($color,$amount)，darken($color,$amount)
+```scss
+a {
+  color: rgb(256, 256, 256);
+  background-color: lighten(#ccc, 10%);
+  &:hover {
+    color: rgba(red, 0.5);
+    background-color: darken(#999, 50%);
+  }
+}
+ //css style
+a {
+  color: white;
+  background-color: #e6e6e6;
+}
+a:hover {
+  color: rgba(255, 0, 0, 0.5);
+  background-color: #1a1a1a;
+}
+```
+######自定义函数 @function
 ```scss
 $a: 40px;
 $b: 10px;
@@ -397,18 +574,19 @@ $b: 10px;
   width: grid-width(5);
 }
 
-客管的又要兼容小程序的rpx,要兼容h5的rem，那宽度这些就需要写个通用的
-
+//客管
 @function len($n){
-    return $n+'rem'
+    @return $n+rem
 }
 @function len($n){
-    return $n+'rpx'
+    @return $n+rpx
 }
-
 .block{
     width:len(18)
 }
+```
+
+
 ```
 #####注释
 * 标准的CSS注释 /*comment*/,会保留到编译后的文件。
