@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/sass">Sass</router-link>|
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
@@ -16,5 +17,16 @@
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#nav{
+  font-size:0.32rem;
+}
+html,body{
+  width:100%;
+  height:100%;
+}
+ul,li,p{
+  margin:0;
+  padding:0;
 }
 </style>

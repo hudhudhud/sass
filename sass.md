@@ -50,7 +50,7 @@ $map:(dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twi
 }
 ```
 
-##### ${}插值,插值语句可以在选择器或属性名中使用变量
+##### #{}插值,插值语句可以在选择器或属性名中使用变量
 ```scss
 $name: foo;
 $attr: border;
