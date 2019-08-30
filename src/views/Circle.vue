@@ -60,6 +60,7 @@ export default {
 
             //requestAnimationFrame(this.roll)
           
+           //let url = canvas.toDataURL("image/png"); // 将画布内容转换成base64地址
         }
     }
 }
