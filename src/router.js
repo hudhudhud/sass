@@ -30,6 +30,11 @@ export default new Router({
       path:'/circle',
       name:'circle',
       component: () => import('./views/Circle.vue')
+    },
+    {
+      path:'/img',
+      name:'img',
+      component: () => import('./views/ImageLazy.vue')
     }
   ]
 })
