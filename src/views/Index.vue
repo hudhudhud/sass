@@ -26,6 +26,8 @@
     <Customer tagName='Checkbox' v-model='comp.mychecked'/>
     <Customer tagName='Select' v-model='comp.option'/>
     <button @click='submit'>点我</button>
+
+ 
 </section>
 </template>
 <script>
@@ -50,7 +52,7 @@ export default {
                     select1:1,
                     select2:2,
                 }
-            }
+            },
           
         }
     },
@@ -65,7 +67,8 @@ export default {
         },
         submit(){
             console.log(this.comp)
-        }
+
+        },
     }
 }
 </script>

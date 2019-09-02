@@ -1,11 +1,11 @@
 <template>
     <section class="root">
-        <!-- <span v-if='visible'>显示</span>
+        <span v-if='visible'>显示</span>
         <span v-else>隐藏</span>
-        <input type="text" name="" id=""> -->
-        <div v-for='(item,i) in srcList' :key='i'>
+        <input type="text" name="" id="">
+        <!-- <div v-for='(item,i) in srcList' :key='i'>
             <img src="" alt="" :data-src='item'  >
-        </div>
+        </div> -->
     </section>
 </template>
 <script>
@@ -22,18 +22,18 @@ export default {
         }
     },
     mounted(){
-        // let input = document.querySelector('input')
-        // var io = new IntersectionObserver((entries) =>{
-        //     entries.forEach((item) => {
-        //         console.log('intersectionRect',item.intersectionRatio)
-        //         if (item.isIntersecting) {
-        //             this.visible=true
-        //         }else{
-        //             this.visible=false
-        //         }
-        //     })
-        // })
-        // io.observe(input)
+        let input = document.querySelector('input')
+        var io = new IntersectionObserver((entries) =>{
+            entries.forEach((item) => {
+                console.log('intersectionRect',item.intersectionRatio)
+                if (item.isIntersecting) {
+                    this.visible=true
+                }else{
+                    this.visible=false
+                }
+            })
+        })
+        io.observe(input)
 
         // const imgList = [...document.querySelectorAll('img')]
         // var io = new IntersectionObserver((entries) =>{

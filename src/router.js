@@ -35,6 +35,11 @@ export default new Router({
       path:'/img',
       name:'img',
       component: () => import('./views/ImageLazy.vue')
+    },
+    {
+      path:'/pic',
+      name:'pic',
+      component: () => import('./views/Picker.vue')
     }
   ]
 })
