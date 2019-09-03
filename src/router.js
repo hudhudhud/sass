@@ -40,6 +40,11 @@ export default new Router({
       path:'/pic',
       name:'pic',
       component: () => import('./views/Picker.vue')
+    },
+    {//动态组件
+      path:'/dyn',
+      name:'dyn',
+      component: () => import('./views/Dyn.vue')
     }
   ]
 })
