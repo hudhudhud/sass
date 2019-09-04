@@ -1,4 +1,5 @@
 <template>
+    <!-- is后面可以是已注册组件的名字，或一个组件的选项对象 -->
     <component :is='"My"+tagName' v-model='val'>
     </component>
 </template>

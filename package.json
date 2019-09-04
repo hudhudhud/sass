@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "element-ui": "^2.10.1",
+    "html2canvas": "^1.0.0-rc.3",
     "mint-ui": "^2.2.13",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",

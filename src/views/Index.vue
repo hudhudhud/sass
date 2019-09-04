@@ -1,5 +1,5 @@
 <template>
-<section>
+<section class="bgk">
     <ul class="form-ul">
         <li>
             <input type="number" placeholder="请输入数字" v-model='number' pattern="[0-9]*">
@@ -26,20 +26,27 @@
     <Customer tagName='Checkbox' v-model='comp.mychecked'/>
     <Customer tagName='Select' v-model='comp.option'/>
     <button @click='submit'>点我</button>
-
- 
+    
+    <img src="../assets/images/a.png" alt="" id="myimg" @click='showImg'>
+    
+    
+    <!-- 已注册组件的名字，或一个组件的选项对象 -->
+    <component :is='component'></component>
 </section>
 </template>
 <script>
 // import formComponents from '@/components'
 
 import Customer from '@/components/Customer.vue'
+import html2canvas from 'html2canvas'
+import MyInput from '@/components/MyInput.vue'
 export default {
     components: {
         Customer
     },
     data(){
         return{
+            component:MyInput,
             number:0,
             list:[{name:'one',val:1},{name:'two',val:2}],
             form:{
@@ -53,11 +60,24 @@ export default {
                     select2:2,
                 }
             },
+            timer:null
           
         }
     },
     created(){
         this.wait()
+    },
+    mounted(){
+        //模拟长按
+        document.querySelector("#myimg").addEventListener('touchstart',()=>{
+            this.timer = setTimeout(() => {
+                            alert('i m down')
+                        }, 800);
+
+        })
+        document.querySelector("#myimg").addEventListener('touchend',()=>{
+            clearInterval(this.timer)
+        })
     },
     methods:{
         wait(){
@@ -67,15 +87,35 @@ export default {
         },
         submit(){
             console.log(this.comp)
-
+            console.log(333333,event,arguments)
+        },
+        showImg(){
+            //把页面变成canvas
+            html2canvas(document.body,{width:'400',height:'400',scale:4}).then(function(canvas) {
+                let div = document.createElement('div')
+                div.style.cssText = "position:fixed;top:0;left:0;right:0;bottom:0;background-color:#000";
+                div.appendChild(canvas)
+                div.addEventListener('click',()=>{
+                    document.body.removeChild(div)
+                })
+                document.body.appendChild(div);
+                // document.body.appendChild(canvas);
+            });
+            
+            // let a = document.createElement('a')
+            // a.href=event.target.getAttribute('src')
+            // console.log(1111,a)
+            // document.body.appendChild(a);
+            // a.click()
         },
     }
 }
 </script>
-<style lang='scss' scoped>
- section{
-    font-size:.32rem;
-    
+<style lang='scss' >
+ #app{
+    // background:#010101 url(../assets/images/bg.jpg) no-repeat;    
+    // background-size: 100% auto;
+    // min-height: 100vh;
     select{
         display: inline-block;
         width:5rem;
