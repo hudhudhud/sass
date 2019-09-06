@@ -27,18 +27,19 @@
     <Customer tagName='Select' v-model='comp.option'/>
     <button @click='submit'>点我</button>
     
-    <img src="../assets/images/a.png" alt="" id="myimg" @click='showImg'>
+    <img src="../assets/images/a.png" alt="" id="myimg">
     
     
     <!-- 已注册组件的名字，或一个组件的选项对象 -->
     <component :is='component'></component>
+
+   
 </section>
 </template>
 <script>
 // import formComponents from '@/components'
 
 import Customer from '@/components/Customer.vue'
-import html2canvas from 'html2canvas'
 import MyInput from '@/components/MyInput.vue'
 export default {
     components: {
@@ -60,7 +61,7 @@ export default {
                     select2:2,
                 }
             },
-            timer:null
+            timer:null,
           
         }
     },
@@ -88,25 +89,6 @@ export default {
         submit(){
             console.log(this.comp)
             console.log(333333,event,arguments)
-        },
-        showImg(){
-            //把页面变成canvas
-            html2canvas(document.body,{width:'400',height:'400',scale:4}).then(function(canvas) {
-                let div = document.createElement('div')
-                div.style.cssText = "position:fixed;top:0;left:0;right:0;bottom:0;background-color:#000";
-                div.appendChild(canvas)
-                div.addEventListener('click',()=>{
-                    document.body.removeChild(div)
-                })
-                document.body.appendChild(div);
-                // document.body.appendChild(canvas);
-            });
-            
-            // let a = document.createElement('a')
-            // a.href=event.target.getAttribute('src')
-            // console.log(1111,a)
-            // document.body.appendChild(a);
-            // a.click()
         },
     }
 }
