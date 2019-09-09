@@ -72,7 +72,11 @@ export default new Router({
         component: () => import('./views/Design/Show.vue')
       },
       ]
-     
+    },
+    {
+      path:'/degree',
+      name:'degree',
+      component: () => import('./views/Degree.vue')
     }
   ]
 })

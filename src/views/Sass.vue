@@ -64,6 +64,7 @@
     }
 </script>
 <style scoped lang="scss">
+@import url('../assets/style/degree.scss');
     //普通（局部）变量:用$base:1.6 !global可以将局部变量转为全局变量
     // 默认（全局）变量：用$base:1.6 !default声明为全局变量
     //变量是数组，用nth($HSize,index)
