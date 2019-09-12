@@ -5,6 +5,8 @@
             <p>《{{album.name}}》是 {{singer}} 2005年11月发行的</p>
             <p>主打为 {{album.theme}} </p>
             <p>作词人为 {{singer}} 等人。</p>
+            <input type="text" v-model='song'>
+            <p>sum:{{sum}}</p>
         </div>
     </body>
 </html>
@@ -18,7 +20,19 @@ let mvvm = new Mvvm({
             name:'主打歌',
             theme:'夜曲',
         },
-        singer:'周'
-    }
+        singer:'周',
+        a:1,
+        b:2
+    },
+    computed:{
+        sum(){
+            return this.a+this.b;
+        }
+    },
+    mounted(){
+        setTimeout(() => {
+            console.log('mounted...')
+        }, 1000);
+    },
 })
 </script>
