@@ -1,8 +1,33 @@
 <template>
   <div class="about ff container">
+    <a href="https://www.baidu.com">百度</a>
     <h1>This is an about page</h1>
+    <base-table :list='list' :columns='columns' @selection-change='change'>
+    </base-table>
   </div>
 </template>
+<script>
+export default {
+  data(){
+    return {
+    list:[{name:1,age:2}],
+    columns:[
+      {type:'selection'},
+      {key:'name',title:'姓名啦啦'},
+      {key:'age',title:'年龄'},
+    ]
+    }
+  },
+  methods:{
+    click(){
+      alert(1)
+    },
+    change(){
+      console.log('change')
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
   $breakpoints: (
           'small'  : ( max-width:400px ),
