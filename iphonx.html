@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover">
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        /* 适配齐刘海*/
+        
+        .safe-area-inset-top {
+            display: block;
+            padding-top: constant(safe-area-inset-top);
+            padding-top: env(safe-area-inset-top);
+            background-color: inherit;
+        }
+        /* 适配底部黑条*/
+        
+        .safe-area-inset-bottom {
+            display: block;
+            padding-bottom: constant(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
+            background-color: inherit;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: pink;
+        }
+        
+        header .header-content {
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        .content {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            background-color: green;
+            line-height: 1.5;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: gray;
+        }
+        
+        footer .footer-content {
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="safe-area-inset-top"></div>
+        <div class="header-content">
+            i m header
+        </div>
+    </header>
+    <div class="content">
+        <div class="safe-area-inset-top"></div>
+        <div>
+            <p>start</p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ad officia iusto illum nostrum fugiat sint vitae, placeat, dolor incidunt dicta quod. Saepe debitis repellat similique possimus quam ratione minima eos. Maiores dignissimos explicabo vitae.
+            Minima temporibus alias cumque architecto autem earum debitis maiores! Nostrum aliquid nam vitae tempore cumque, quo quaerat repudiandae ab a totam minus ex, commodi, at perspiciatis alias natus fugiat voluptatum beatae fuga! Autem ducimus
+            iusto ipsam deleniti rerum accusantium quia optio. Quia, blanditiis, corrupti nisi qui sint aliquam quos possimus sapiente placeat omnis culpa nulla quasi corporis a fugiat itaque error accusamus repellat sunt quibusdam amet fugit nemo, labore
+            inventore! Alias, impedit? Soluta nemo eaque voluptatum vel sed quos? Quasi, architecto magni corrupti assumenda fugiat error itaque explicabo, dignissimos facilis numquam dolore voluptatum laborum ipsa! At quis voluptatibus corrupti natus
+            aut, officiis facilis soluta quo debitis, inventore amet, odio dolorem quisquam ipsam. Voluptate fugiat commodi laudantium debitis minus blanditiis? Ad magni maiores hic tempora obcaecati quia doloremque, ex asperiores consequuntur dicta provident
+            excepturi odit fuga labore deleniti, repudiandae quaerat corporis nisi. Quidem id modi, deleniti dicta doloremque nobis minima sit odio minus earum ullam! Impedit facere earum, fuga quam repellat eos reiciendis quod vel quia corporis ex nobis
+            sit! Recusandae eius magnam excepturi. Ducimus perspiciatis necessitatibus quibusdam, fugiat nesciunt unde mollitia accusamus porro? Dolorum odit facilis sit quos omnis animi earum eaque, eius libero doloribus nam ut iusto tempora perferendis
+            excepturi facere maxime similique laudantium officia ratione, inventore voluptatum qui amet rerum? Ut incidunt voluptas atque, laboriosam in, animi soluta debitis ea obcaecati perspiciatis necessitatibus odio sed sint, sunt iusto facere officiis.
+            Molestiae distinctio maiores tempora illo accusamus illum voluptas eligendi nam. Alias, distinctio ullam totam obcaecati tenetur reiciendis in fuga minus possimus ea quidem neque fugit accusantium unde rerum. Sapiente, amet ipsum earum aut
+            perspiciatis eum cupiditate recusandae temporibus delectus ad in laudantium debitis repellat atque, esse sint natus eos veniam aliquid ratione pariatur. Eum ut, quod molestias deleniti placeat, minima beatae vero minus sint accusantium ipsam
+            deserunt exercitationem sed voluptatem eius explicabo dolor sit, inventore consequuntur aliquam quaerat laboriosam enim totam tempore? Explicabo enim porro velit vero doloribus sed laborum, tenetur illum. Voluptatem minima iste ratione aliquid
+            amet? Nostrum temporibus repellendus recusandae tempora repellat ipsa pariatur magni fuga obcaecati sint nihil corrupti iure accusantium, laborum, non doloribus ea earum, inventore dignissimos quia reprehenderit similique beatae commodi fugit!
+            Id at voluptatibus fugiat fuga velit architecto, atque numquam sint nesciunt autem minus earum reprehenderit explicabo expedita, dolore ducimus eos, sunt assumenda necessitatibus porro. Ipsum nemo dolorum ex, nam tenetur temporibus rem? Ex
+            facilis soluta eius labore recusandae quos doloribus esse iste amet eaque provident, vel excepturi. Dolorem aspernatur doloribus totam! Quasi molestiae maxime odio at vel, sed amet, deserunt doloribus omnis quos distinctio repellendus voluptate.
+            Quos molestias natus laborum unde, rem ratione facilis nihil saepe ea. Nobis quidem sequi nemo itaque ipsum quae, labore laborum voluptates corporis officia quas explicabo rerum architecto cupiditate temporibus autem sit animi maxime. Molestias
+            accusantium necessitatibus dolores esse repudiandae debitis.
+            <p>end</p>
+        </div>
+        <div class="safe-area-inset-bottom"></div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            i m footer
+        </div>
+        <div class="safe-area-inset-bottom"></div>
+    </footer>
+</body>
+
+</html>

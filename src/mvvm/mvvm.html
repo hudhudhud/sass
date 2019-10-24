@@ -1,7 +1,7 @@
 <html>
     <body>
         <div id='app'>
-            <h1>{{song}}</h1>
+            <h1 class="test">{{song}}</h1>
             <p>《{{album.name}}》是 {{singer}} 2005年11月发行的</p>
             <p>主打为 {{album.theme}} </p>
             <p>作词人为 {{singer}} 等人。</p>
@@ -36,3 +36,8 @@ let mvvm = new Mvvm({
     },
 })
 </script>
+<style>
+.test{
+    color:red;
+}
+</style>

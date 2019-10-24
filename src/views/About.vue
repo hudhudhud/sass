@@ -1,34 +1,64 @@
 <template>
   <div class="about ff container">
-    <a href="https://www.baidu.com">百度</a>
     <h1>This is an about page</h1>
-    <base-table :list='list' :columns='columns' @selection-change='change'>
-    </base-table>
+    <div class="fit">test auto fit</div>
+    <div @click='increment'>{{count}}</div>
+    <swiper :options="swiperOption">
+      <swiper-slide><img src="../assets/images/a.png"></swiper-slide>
+      <swiper-slide><img src="../assets/images/b.png"></swiper-slide>
+      <swiper-slide><img src="../assets/images/c.png"></swiper-slide>
+      <swiper-slide><img src="../assets/images/d.png"></swiper-slide>
+    </swiper>
   </div>
 </template>
 <script>
+import { mapState , mapGetters , mapMutations } from 'vuex'
 export default {
   data(){
     return {
-    list:[{name:1,age:2}],
-    columns:[
-      {type:'selection'},
-      {key:'name',title:'姓名啦啦'},
-      {key:'age',title:'年龄'},
-    ]
+      num:0,
+      swiperOption: {//swiper3
+       roundLengths : true, 
+        initialSlide :0,
+        speed:600,
+        slidesPerView:"auto", //设置slider容器能够同时显示的slides数量(carousel模式)。或者 'auto'则自动根据slides的宽度来设定数量。
+        centeredSlides : true,
+        followFinger : false,
+      }
     }
   },
+  computed: {
+  // 使用对象展开运算符将 getter 混入 computed 对象中
+    ...mapState([
+      'count',
+    ]),
+  },
   methods:{
-    click(){
-      alert(1)
-    },
-    change(){
-      console.log('change')
-    }
+     ...mapMutations([
+      'increment' ,
+      'set',
+      'get'
+     ])
   }
+
 }
 </script>
 <style lang="scss" scoped>
+.fit{
+  width:50px;
+  height: 50px;
+  background-color: red;
+}
+.swiper-slide{
+  width:80%;
+  img{
+    width:100%;
+  }
+}
+// img{
+//   width:100%;
+//   height: auto;
+// }
   $breakpoints: (
           'small'  : ( max-width:400px ),
           'medium' : "( min-width: 401px ) and (max-width:800px)",
@@ -56,7 +86,7 @@ export default {
     }
     @include  respond-to(small){
       font-size: 12px;
-      background-color:red;
+      background-color:rgba(0,0,0,0.1);
     }
   }
 
