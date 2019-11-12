@@ -9,11 +9,45 @@
       <swiper-slide><img src="../assets/images/c.png"></swiper-slide>
       <swiper-slide><img src="../assets/images/d.png"></swiper-slide>
     </swiper>
+    <mt-tabbar v-model="selected">
+      <mt-tab-item id="tab1">
+        tab1
+      </mt-tab-item>
+      <mt-tab-item id="tab2">
+        tab2
+      </mt-tab-item>
+      <mt-tab-item id="tab3">
+        tab3
+      </mt-tab-item>
+      <mt-tab-item id="tab4">
+        tab4
+      </mt-tab-item>
+       <mt-tab-item id="tab4">
+        tab5555555555555
+      </mt-tab-item>
+       <mt-tab-item id="tab5">
+        tab6
+      </mt-tab-item>
+       <mt-tab-item id="tab6">
+        tab6
+      </mt-tab-item>
+       <mt-tab-item id="tab7">
+        tab6
+      </mt-tab-item>
+       <mt-tab-item id="tab8">
+        tab62222222222222222
+      </mt-tab-item>
+    </mt-tabbar>
+    <MyTabs :list='tabs' v-model="currentTab"></MyTabs>
   </div>
 </template>
 <script>
 import { mapState , mapGetters , mapMutations } from 'vuex'
+import MyTabs from '../components/MyTabs'
 export default {
+  components:{
+    MyTabs,
+  },
   data(){
     return {
       num:0,
@@ -24,7 +58,11 @@ export default {
         slidesPerView:"auto", //设置slider容器能够同时显示的slides数量(carousel模式)。或者 'auto'则自动根据slides的宽度来设定数量。
         centeredSlides : true,
         followFinger : false,
-      }
+      },
+      
+      selected:'tab1',
+      currentTab:0,
+      tabs:['tab1','tab2','tab3','tab43444444444','tab5','tab6','tab74343434','tab88888888888']
     }
   },
   computed: {
@@ -166,7 +204,7 @@ $n:2;
   }
 
   a {
-    color: rgb(256, 256, 256);
+    color:#000;
     background-color: lighten(#ccc, 10%);
     &:hover {
       color: rgba(red, 0.5);
