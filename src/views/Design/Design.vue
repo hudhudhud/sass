@@ -18,6 +18,7 @@ import indexConfig from '@/components/indexConfig.js'
 import {configMap} from '@/components/indexConfig.js'
 import components from '@/components'
 export default {
+    name:'design',
     components,
     data(){
         return {
@@ -28,6 +29,7 @@ export default {
         }
     },
     mounted(){
+        console.log('design mounted....')
         let page = localStorage.getItem('page')
         if(page){
             this.componentList=JSON.parse(page)

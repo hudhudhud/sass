@@ -71,6 +71,9 @@ export default {
       'count',
     ]),
   },
+  mounted(){
+     console.log('about mounted.......')
+  },
   methods:{
      ...mapMutations([
       'increment' ,

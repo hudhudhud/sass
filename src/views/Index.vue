@@ -31,6 +31,11 @@
 
     <!-- 已注册组件的名字，或一个组件的选项对象 -->
     <component :is="component"></component>
+    
+    <ul class="links">
+      <li>keep alive 测试</li>
+      <li @click='$router.push("/nine")'>nine</li>
+    </ul>
   </section>
 </template>
 <script>
@@ -39,6 +44,7 @@
 import Customer from "@/components/Customer.vue";
 import MyInput from "@/components/MyInput.vue";
 export default {
+  name:'index',
   components: {
     Customer
   },
@@ -65,6 +71,7 @@ export default {
     this.wait();
   },
   mounted() {
+    console.log('index mounted.......')
     //模拟长按
     document.querySelector("#myimg").addEventListener("touchstart", () => {
       this.timer = setTimeout(() => {
@@ -115,6 +122,9 @@ select {
 /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
 select::-ms-expand {
   display: none;
+}
+.links li{
+  padding:10px;
 }
 </style>
 

@@ -5,12 +5,17 @@
             <hr>
             <DynChild :level="level"></DynChild>
             <p @click='click'>{{ary[0]}}</p>
+            <ul class="links">
+                <li>keep alive 测试</li>
+                <li @click='$router.push("/degree")'>degree</li>
+            </ul>
         </section>
 </template>
 <script>
 //动态组件
 import DynChild from '@/components/DynChild.vue'
 export default {
+    name:"dyn",
     components:{
         DynChild
     },
@@ -19,6 +24,9 @@ export default {
              level: 0 ,
              ary:[0,1,2]
         };
+    },
+    mounted(){
+        console.log('dyn mounted...')
     },
     methods:{
         click(){

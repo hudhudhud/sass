@@ -5,7 +5,10 @@
             <router-link to="/sass">Sass</router-link>|
             <router-link to="/about">About</router-link>
         </div>
-        <router-view/>
+        <keep-alive v-if='$route.meta.keepAlive'>
+            <router-view />
+        </keep-alive>
+        <router-view  v-else/>
     </section>
 </template>
 <script>

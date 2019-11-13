@@ -1,16 +1,21 @@
 <template>
     <section>
-        <ul>
+        <ul class="nine">
             <li v-for="(item,i) in list" :class="{btn:item===5,active:rollSort[currentActive]==i,disabled:(item===5&&clicked)}"
              :key="i" @click="item===5&&start()">
                 {{item}}
             </li>
+        </ul>
+        <ul class="links">
+            <li>keep alive 测试</li>
+            <li @click='$router.push("/dyn")'>dyn</li>
         </ul>
     </section>
 </template>
 <script>
 const list=(new Array(9)).fill(true).map((item,i)=>i+1);
 export default {
+    name:'nine',
     data(){
         return {
             currentActive:-1,//当前在rollSort中的index
@@ -25,6 +30,7 @@ export default {
         }
     },
     mounted(){
+        console.log('nine mounted....')
        // this.roll()
     },
     methods:{
@@ -67,7 +73,7 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-ul{
+.nine{
     width:100%;
     height: 100%;
     width:6rem;
