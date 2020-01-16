@@ -98,6 +98,16 @@ export default new Router({
                 keepAlive: true,
                 deepth: 3
             }
+        },
+        {
+            path: '/slider',
+            name: 'slider',
+            component: () =>
+                import ('./views/Slider.vue'),
+            meta: {
+                keepAlive: true,
+                deepth: 3
+            }
         }
     ]
 })

@@ -36,6 +36,8 @@
       <li>keep alive 测试</li>
       <li @click='$router.push("/nine")'>nine</li>
     </ul>
+
+    
   </section>
 </template>
 <script>

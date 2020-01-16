@@ -14,7 +14,7 @@ export default {
     }
   },
   watch: {
-    //按需缓存页面,如a-b-c,c到b需要b是缓存的，a到b需要b重新加载
+    //按需缓存页面,如a-b-c,c到b需要b是缓存的，a到b需要b重新加载,即返回用缓存，重新进入就重新加载
     //同一个router-view里面的内容才会缓存，否则如果切到其他router-view,则会销毁
     //https://juejin.im/post/5cdcbae9e51d454759351d84
     $route(to, from) {
