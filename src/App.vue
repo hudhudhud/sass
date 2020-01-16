@@ -36,6 +36,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width:100%;
+  height: 100%;
 }
 #nav{
   font-size:0.32rem;
@@ -47,6 +49,7 @@ html,body{
   /* height:100%; */
   /* box-sizing: border-box;  */
   font-size:.32rem;
+  height:100%;
 }
 ul,li,p{
   margin:0;

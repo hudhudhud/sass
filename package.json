@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "element-ui": "^2.10.1",
+    "font-awesome": "^4.7.0",
     "mint-ui": "^2.2.13",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
